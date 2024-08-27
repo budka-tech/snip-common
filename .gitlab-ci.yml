@@ -21,8 +21,9 @@ deploy_go:
   image: alpine:latest
   script:
     - apk add --no-cache git
+    - mkdir common-go && cd common-go
     - git remote add mirror1 https://pa-khan:Didaandpes9!@gitlab.com/standart-dev/common-go.git
-    - git add -f status/dist/go/
+    - git add -f ../status/dist/go/
     - git push mirror1 dev
   only:
     - main
