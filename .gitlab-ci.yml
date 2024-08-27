@@ -11,9 +11,9 @@ build:
     - bun run build
   artifacts:
     paths:
-      - dist/go/
-      - dist/ts/
-      - dist/dart/
+      - /status/dist/go/
+      - /status/dist/ts/
+      - /status/dist/dart/
 #stages:
 #  - mirror
 #
