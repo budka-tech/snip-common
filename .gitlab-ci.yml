@@ -23,8 +23,7 @@ deploy_go:
     - apk add --no-cache git
     - git config --global user.email "cibot@stdev-cloud.ru"
     - git config --global user.name "Ci Bot"
-    - mkdir common-go && cd common-go
-    - git clone https://pa-khan:Didaandpes9!@gitlab.com/standart-dev/common-go.git
+    - git clone https://pa-khan:Didaandpes9!@gitlab.com/standart-dev/common-go.git && cd common-go
     - cp -r ../status/dist/go/ .
     - git add .
     - git commit -m "share"
