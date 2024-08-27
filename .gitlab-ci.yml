@@ -2,6 +2,7 @@ image: oven/bun:latest
 
 stages:
   - build
+  - deploy
 
 build:
   stage: build
