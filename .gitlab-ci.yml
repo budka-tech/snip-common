@@ -24,6 +24,7 @@ deploy_go:
     - mkdir common-go && cd common-go
     - git clone https://pa-khan:Didaandpes9!@gitlab.com/standart-dev/common-go.git
     - git add -f ../status/dist/go/
+    - git commit -m "share"
     - git push -u origin dev
   only:
     - main
