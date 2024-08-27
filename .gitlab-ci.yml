@@ -9,6 +9,7 @@ build:
     - cd status
     - bun i
     - bun run build
+    - ls -R dist/
   artifacts:
     paths:
       - dist/go/
