@@ -1,8 +1,8 @@
 enum: Status
 output:
-  go: ./dist/go/status/status.go
-  ts: ./dist/ts/status/status.ts
-  dart: ./dist/dart/status/status.dart
+  go: ./go/status/status.go
+  ts: ./ts/status/status.ts
+  dart: ./dart/status/status.dart
 
 list:
   Success: Успешно
