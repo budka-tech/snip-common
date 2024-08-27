@@ -1,11 +1,8 @@
-image: oven/bun:latest
+image: oven/bun:canary-debian
 
 stages:
   - build
   - deploy
-
-before_script:
-  - apk add --no-cache git  # Установка Git для Alpine
 
 build:
   stage: build
