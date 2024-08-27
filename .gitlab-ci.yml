@@ -6,8 +6,8 @@ stages:
 build:
   stage: build
   script:
-    - bun i
     - cd status
+    - bun i
     - bun run build
   artifacts:
     paths:
