@@ -25,7 +25,7 @@ deploy_go:
     - git config --global user.name "Ci Bot"
     - mkdir common-go && cd common-go
     - git clone https://pa-khan:Didaandpes9!@gitlab.com/standart-dev/common-go.git
-    - cp ../status/dist/go/ .
+    - cp status/dist/go/ .
     - git add .
     - git commit -m "share"
     - git push -u origin dev
