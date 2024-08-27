@@ -15,6 +15,15 @@ build:
       - dist/go/
       - dist/ts/
       - dist/dart/
+
+deploy_go:
+  stage: deploy
+  script:
+    - git remote add mirror1 https://gitlab.com/standart-dev/share-go.git
+    - git add status/dist/status/status.go
+    - git push --mirror mirror1
+  only:
+    - main
 #stages:
 #  - mirror
 #
