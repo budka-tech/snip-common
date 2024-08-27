@@ -1,0 +1,50 @@
+version: '3'
+
+tasks:
+  generate:
+    aliases:
+      - gen
+    desc: "Генерация proto кода"
+    cmds:
+      - protoc -I modules/contract --go_out=dist/go/contract --go_opt=paths=source_relative --go-grpc_out=dist/go/contract --go-grpc_opt=paths=source_relative modules/contract/*/*.proto
+      - protoc -I modules/contract --dart_out=dist/dart/contract --proto_path=modules/contract modules/contract/*/*.proto
+      - protoc -I modules/contract --plugin=protoc-gen-ts=node_modules/.bin/protoc-gen-ts --ts_out=dist/ts/contract modules/contract/*/*.proto
+  update:
+    desc: "Push changes in all submodules and update the main repository"
+    cmds:
+      - task: push-go
+      - task: push-ts
+      - task: push-dart
+      - task: update-main
+
+  push-go:
+    desc: "Push changes in the dist/go submodule"
+    cmds:
+      - cd dist/go
+      - git add .
+      - git commit -m "Update go submodule"
+      - git push origin main  # Замените main на нужную ветку
+
+  push-ts:
+    desc: "Push changes in the dist/ts submodule"
+    cmds:
+      - cd dist/ts
+      - git add .
+      - git commit -m "Update ts submodule"
+      - git push origin main  # Замените main на нужную ветку
+
+  push-dart:
+    desc: "Push changes in the dist/dart submodule"
+    cmds:
+      - cd dist/dart
+      - git add .
+      - git commit -m "Update dart submodule"
+      - git push origin main  # Замените main на нужную ветку
+
+  update-main:
+    desc: "Update the main repository with submodule changes"
+    cmds:
+      - cd ../..
+      - git add dist/go dist/ts dist/dart
+      - git commit -m "Update submodules"
+      - git push origin main  # Замените main на нужную ветку

@@ -1,0 +1,69 @@
+syntax = "proto3";
+import "google/protobuf/any.proto";
+package server;
+option go_package = "stdev.server;serverv1";
+
+service Server {
+  rpc Call(CallRequest) returns (CallResponse);
+  rpc Subscribe(SubscribeRequest) returns (SubscribeResponse);
+  rpc Heartbeat(HeartbeatMessage) returns (HeartbeatMessage);
+}
+
+enum MessageType {
+  Welcome = 0;
+  Call = 1;
+  CallSuccess = 2;
+  CallError = 3;
+  Subscribe = 4;
+  SubscribeError = 5;
+  Unsubscribe = 6;
+  Event = 7;
+  Heartbeat = 20;
+}
+
+enum Domain {
+  Auth = 0;
+  Users = 1;
+}
+
+message Meta {
+  MessageType type = 1;
+  Domain domain = 2;
+  string name = 3;
+  string id = 4;
+}
+
+message CallRequest {
+  Meta meta = 1;
+  google.protobuf.Any data = 3;
+}
+
+message CallResponse {
+  Meta meta = 1;
+  google.protobuf.Any data = 3;
+}
+
+message SubscribeRequest {
+  Meta meta = 1;
+}
+
+enum SubscribeAction {
+  Init = 0;
+  Create = 1;
+  Update = 2;
+  Delete = 3;
+}
+
+message SubscribeData {
+  SubscribeAction action = 1;
+  google.protobuf.Any data = 2;
+}
+
+message SubscribeResponse {
+  Meta meta = 1;
+  SubscribeData data = 2;
+}
+
+message HeartbeatMessage {
+  bool heartbeat = 1;
+}

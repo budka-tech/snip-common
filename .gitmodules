@@ -1,0 +1,11 @@
+[submodule "dist/go"]
+    path = dist/go
+    url = git@gitlab.com:standart-dev/common-go.git
+
+[submodule "dist/ts"]
+    path = dist/ts
+    url = git@gitlab.com:standart-dev/common-ts.git
+
+[submodule "dist/dart"]
+    path = dist/dart
+    url = git@gitlab.com:standart-dev/common-dart.git

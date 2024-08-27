@@ -1,0 +1,91 @@
+syntax = "proto3";
+package users;
+option go_package = "stdev.users;usersv1";
+
+service Users {
+  rpc Register(RegisterRequest) returns(LoginResponse);
+  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc HasSession(HasSessionRequest) returns(CommonResponse);
+  rpc GetAccount(CommonRequest) returns(Account);
+  rpc UpdateAccountData(UpdateAccountDataRequest) returns(CommonResponse);
+  rpc UpdatePassword(UpdatePasswordRequest) returns(CommonResponse);
+  rpc UpdatePhoto(UpdatePhotoRequest) returns(CommonResponse);
+  rpc AddPhone(AddPhoneRequest) returns(CommonResponse);
+  rpc UpdatePhone(UpdatePhotoRequest) returns(CommonResponse);
+  rpc RemovePhone(RemovePhoneRequest) returns(CommonResponse);
+}
+
+message CommonRequest {
+  uint32 accountId = 2;
+}
+
+message CommonResponse {
+  bool status = 1;
+  repeated uint32 codes = 2;
+}
+
+message HasSessionRequest {
+  int64 sessionId = 1;
+  uint32 accountId = 2;
+}
+
+message RegisterRequest {
+  string phone = 1;
+}
+
+message LoginRequest {
+  string phone = 1;
+}
+
+message LoginResponse {
+  int64 sessionId = 1;
+  Account account = 2;
+}
+
+message Account {
+  int32 id = 1;
+  repeated string phones = 2;
+  string photo = 3;
+  string name = 4;
+  string surname = 5;
+  string patronymic = 6;
+  string birthdate = 7;
+  int32 country = 8;
+  int32 locale = 9;
+  int32 timezone = 10;
+}
+
+message UpdateAccountDataRequest {
+  string name = 1;
+  string surname = 2;
+  string patronymic = 3;
+  string birthdate = 4;
+  int32 country = 5;
+  int32 locale = 6;
+  int32 timezone = 7;
+}
+
+message UpdatePasswordRequest {
+  int32 accountId = 1;
+  string password = 2;
+}
+
+message UpdatePhotoRequest {
+  int32 accountId = 1;
+  bytes photo = 2;
+}
+
+message AddPhoneRequest {
+  int32 accountId = 1;
+  string phone = 2;
+}
+
+message UpdatePhoneRequest {
+  int32 accountId = 1;
+  string phone = 2;
+}
+
+message RemovePhoneRequest {
+  int32 accountId = 1;
+  string phone = 2;
+}
