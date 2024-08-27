@@ -27,6 +27,8 @@ deploy_go:
     - git push --mirror mirror1
   only:
     - main
+  dependencies:
+    - build
 #stages:
 #  - mirror
 #
