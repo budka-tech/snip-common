@@ -20,19 +20,18 @@ tasks:
   push-go:
     desc: "Push changes in the dist/go submodule"
     cmds:
-      - cd dist/go && git add . && git commit -m "Update go submodule" && git push origin main  # Замените main на нужную ветку
-
+      - cd dist/go && git add . && git commit -m "Update go submodule" && git push origin main
   push-ts:
     desc: "Push changes in the dist/ts submodule"
     cmds:
-      - cd dist/ts && git add . && git commit -m "Update ts submodule" && git push origin main  # Замените main на нужную ветку
+      - cd dist/ts && git add . && git commit -m "Update ts submodule" && git push origin main
   push-dart:
     desc: "Push changes in the dist/dart submodule"
     cmds:
-      - cd dist/dart && git add . && git commit -m "Update dart submodule" && git push origin main  # Замените main на нужную ветку
+      - cd dist/dart && git add . && git commit -m "Update dart submodule" && git push origin main
   update-main:
     desc: "Update the main repository with submodule changes"
     cmds:
       - git add .
       - git commit -m "Update submodules"
-      - git push origin main  # Замените main на нужную ветку
+      - git push origin main
