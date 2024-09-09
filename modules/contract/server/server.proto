@@ -4,26 +4,23 @@ package server;
 option go_package = "stdev.server;serverv1";
 
 service Server {
-  rpc Call(CallRequest) returns (CallResponse);
-  rpc Subscribe(SubscribeRequest) returns (SubscribeResponse);
-  rpc Heartbeat(HeartbeatMessage) returns (HeartbeatMessage);
+  rpc Call(Request) returns (CallResponse);
+  rpc Subscribe(Request) returns (SubscribeResponse);
+  rpc UnSubscribe(UnsubscribeRequest) returns (google.protobuf.Any);
 }
 
 enum MessageType {
-  Welcome = 0;
-  Call = 1;
-  CallSuccess = 2;
-  CallError = 3;
-  Subscribe = 4;
-  SubscribeError = 5;
-  Unsubscribe = 6;
-  Event = 7;
-  Heartbeat = 20;
+  Call = 0;
+  CallSuccess = 1;
+  CallError = 2;
+  Subscribe = 3;
+  SubscribeError = 4;
+  Unsubscribe = 5;
+  Event = 6;
 }
 
 enum Domain {
-  Auth = 0;
-  Users = 1;
+  Users = 0;
 }
 
 message Meta {
@@ -33,17 +30,21 @@ message Meta {
   string id = 4;
 }
 
-message CallRequest {
+message Request {
   Meta meta = 1;
-  google.protobuf.Any data = 3;
+  google.protobuf.Any data = 2;
 }
 
 message CallResponse {
   Meta meta = 1;
-  google.protobuf.Any data = 3;
+  google.protobuf.Any data = 2;
 }
 
 message SubscribeRequest {
+  Meta meta = 1;
+}
+
+message UnsubscribeRequest {
   Meta meta = 1;
 }
 
@@ -62,8 +63,4 @@ message SubscribeData {
 message SubscribeResponse {
   Meta meta = 1;
   SubscribeData data = 2;
-}
-
-message HeartbeatMessage {
-  bool heartbeat = 1;
 }
