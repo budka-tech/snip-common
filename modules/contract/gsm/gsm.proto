@@ -1,6 +1,6 @@
 syntax = "proto3";
 package gsm;
-option go_package = "stdev.gsm;gsmv1";
+option go_package = "snip.gsm;gsmv1";
 
 service Sms {
   rpc GetSms(GetSmsRequest) returns(GetSmsResponse);

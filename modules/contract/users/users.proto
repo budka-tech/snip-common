@@ -1,6 +1,6 @@
 syntax = "proto3";
 package users;
-option go_package = "stdev.users;usersv1";
+option go_package = "snip.users;usersv1";
 
 service Users {
   rpc Register(RegisterRequest) returns(LoginResponse);
