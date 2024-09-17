@@ -4,7 +4,7 @@ package users;
 option go_package = "snip.users;usersv1";
 
 service Users {
-  rpc Register(RegisterRequest) returns(LoginResponse);
+  rpc Register(RegisterRequest) returns(CommonResponse);
   rpc Login(LoginRequest) returns (LoginResponse);
   rpc HasSession(HasSessionRequest) returns(CommonResponse);
   rpc GetAccount(CommonRequest) returns(Account);
