@@ -8,6 +8,7 @@ list:
   Success: Успешно
   Any: Любая ошибка
   NotFound: Не найдено
+  AlreadyAvailable: Уже имеется
   PermissionDenied: Недостаточно прав
   TooFrequentRequests: Слишком частые запросы
   InternalError: Внутренняя ошибка сервера
