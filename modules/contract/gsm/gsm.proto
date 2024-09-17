@@ -2,7 +2,7 @@ syntax = "proto3";
 package gsm;
 option go_package = "snip.gsm;gsmv1";
 
-service Sms {
+service Gsm {
   rpc GetSms(GetSmsRequest) returns(GetSmsResponse);
   rpc GetFlashCall(GetFlashCallRequest) returns(GetFlashCallResponse);
 }
