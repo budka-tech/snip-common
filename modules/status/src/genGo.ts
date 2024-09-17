@@ -24,7 +24,7 @@ export class GenGo extends Gen {
         }
 
         this._output += "}"
-        this._output += "\n\nfunc readable(s Status) string {\n  return m[s]\n}"
+        this._output += "\n\nFunc readable(s Status) string {\n  return m[s]\n}"
     }
 
 }
