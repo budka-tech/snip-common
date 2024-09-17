@@ -4,6 +4,7 @@ import * as path from "node:path";
 export class Gen {
     protected _output: string = ''
     protected _entries: [string, string][] = []
+    protected _map: Map<string, string> = new Map()
     protected _before: string = ''
     protected _after: string = ''
     protected _dir = ''
@@ -26,7 +27,7 @@ export class Gen {
 
         for (let i = 0; i < Object.entries(this._config.list).length; i++) {
             const [key, value] = Object.entries(this._config.list)[i]
-
+            this._map.set(key, value)
             this._output += this.getRecord(key, value, i == 0, i == this._entries.length - 1)
         }
 

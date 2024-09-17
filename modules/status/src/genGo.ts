@@ -12,4 +12,19 @@ export class GenGo extends Gen {
     protected getRecord(key: string, value: string, isFirst: boolean, isLast: boolean): string {
         return `  ${key} ${isFirst ? `${this._config.enum} = iota` : ''} // ${value}\n`
     }
+
+    genOutput(): void {
+        super.genOutput()
+
+        this._output += "\nvar m = map[Status]string{\n"
+
+        for (let i = 0; i < this._entries.length; i++) {
+            const [key, value] = this._entries[i]
+            this._output += `  ${key}:"${value}",\n`
+        }
+
+        this._output += "}"
+        this._output += "\n\nfunc readable(s Status) string {\n  return m[s]\n}"
+    }
+
 }

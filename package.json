@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "ctrc": "cd modules/status && bun run build"
+  },
   "dependencies": {},
   "devDependencies": {
     "@protobuf-ts/plugin": "^2.9.4"
