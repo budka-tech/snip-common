@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "ctrc": "cd modules/status && bun run build"
+    "build:status": "cd modules/status && bun run build"
   },
   "dependencies": {},
   "devDependencies": {
