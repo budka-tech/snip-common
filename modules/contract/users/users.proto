@@ -22,7 +22,7 @@ message CommonRequest {
 
 message CommonResponse {
   bool status = 1;
-  repeated uint32 codes = 2;
+  uint32 code = 2;
 }
 
 message HasSessionRequest {
