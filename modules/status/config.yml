@@ -5,7 +5,7 @@ output:
   dart: ./dart/status/status.dart
 
 list:
-  Success: Успешно
+  OK: Успешно
   Any: Любая ошибка
   NotFound: Не найдено
   AlreadyExists: Уже имеется
