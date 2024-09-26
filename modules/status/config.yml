@@ -8,7 +8,7 @@ list:
   Success: Успешно
   Any: Любая ошибка
   NotFound: Не найдено
-  AlreadyAvailable: Уже имеется
+  AlreadyExists: Уже имеется
   PermissionDenied: Недостаточно прав
   TooFrequentRequests: Слишком частые запросы
   InternalError: Внутренняя ошибка сервера
@@ -19,6 +19,6 @@ list:
   IncorrectValue: Неверное значение
   Inactivity: Бездействие
   Timeout: Время ожидания истекло
-  InvalidInput: Неверный ввод
   ResourceUnavailable: Ресурс недоступен
   OperationFailed: Операция не удалась
+  NotImplemented: Не реализован
