@@ -1,5 +1,7 @@
 syntax = "proto3";
+
 import "google/protobuf/timestamp.proto";
+
 package users;
 option go_package = "snip.users;usersv1";
 
@@ -16,13 +18,13 @@ service Users {
   rpc RemovePhone(RemovePhoneRequest) returns(CommonResponse);
 }
 
-message CommonRequest {
-  uint32 accountId = 2;
-}
-
 message CommonResponse {
   bool status = 1;
   uint32 code = 2;
+}
+
+message CommonRequest {
+  uint32 accountId = 2;
 }
 
 message HasSessionRequest {

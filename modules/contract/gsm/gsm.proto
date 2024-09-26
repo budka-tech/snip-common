@@ -3,24 +3,20 @@ package gsm;
 option go_package = "snip.gsm;gsmv1";
 
 service Gsm {
-  rpc GetSms(GetSmsRequest) returns(GetSmsResponse);
-  rpc GetFlashCall(GetFlashCallRequest) returns(GetFlashCallResponse);
+  rpc SendSms(SendSmsRequest) returns(CommonResponse);
+  rpc FlashCall(FlashCallRequest) returns(CommonResponse);
 }
 
-message GetSmsRequest {
-  int32 userId = 1;
+message CommonResponse {
+  bool status = 1;
+  uint32 code = 2;
+}
+
+message SendSmsRequest {
+  string message = 1;
   string phone = 2;
 }
 
-message GetSmsResponse {
-  string sms = 1;
-}
-
-message GetFlashCallRequest {
+message FlashCallRequest {
   string phone = 1;
 }
-
-message GetFlashCallResponse {
-  bool status = 1;
-}
-
