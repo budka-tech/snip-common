@@ -37,9 +37,10 @@ message IdentificationRequest {
 }
 
 message IdentificationResponse {
-  IdentificationType type = 1;
-  repeated IdentificationType otherMethods = 2;
-  string data = 3;
+  uint32 status = 1;
+  IdentificationType type = 2;
+  repeated IdentificationType otherMethods = 3;
+  string data = 4;
 }
 
 message CheckCodeRequest {
