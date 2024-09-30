@@ -35,6 +35,7 @@ message IdentificationResponse {
   uint32 type = 2;
   repeated uint32 methods = 3;
   string data = 4;
+  google.protobuf.Timestamp endedAt = 5;
 }
 
 message CheckCodeRequest {
