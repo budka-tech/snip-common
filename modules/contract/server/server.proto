@@ -1,12 +1,13 @@
 syntax = "proto3";
 import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
 package server;
 option go_package = "snip.server;serverv1";
 
 service Server {
-  rpc Call(Request) returns (CallResponse);
-  rpc Subscribe(Request) returns (SubscribeResponse);
-  rpc UnSubscribe(UnsubscribeRequest) returns (google.protobuf.Any);
+  rpc Call(Request) returns (google.protobuf.Empty);
+  rpc Subscribe(Request) returns (google.protobuf.Empty);
+  rpc UnSubscribe(UnsubscribeRequest) returns (google.protobuf.Empty);
 }
 
 enum MessageType {
@@ -20,7 +21,9 @@ enum MessageType {
 }
 
 enum Domain {
-  Users = 0;
+  Auth = 0;
+  Users = 1;
+  Assist = 2;
 }
 
 message Meta {
@@ -38,6 +41,16 @@ message Request {
 message CallResponse {
   Meta meta = 1;
   google.protobuf.Any data = 2;
+}
+
+message CallSuccessResponse {
+  Meta meta = 1;
+  google.protobuf.Any data = 2;
+}
+
+message CallErrorResponse {
+  Meta meta = 1;
+  uint32 code = 2;
 }
 
 message SubscribeRequest {
@@ -63,4 +76,14 @@ message SubscribeData {
 message SubscribeResponse {
   Meta meta = 1;
   SubscribeData data = 2;
+}
+
+message SubscribeErrorResponse {
+  Meta meta = 1;
+  uint32 code = 2;
+}
+
+message EventMessage {
+  Meta meta = 1;
+  uint32 code = 2;
 }
