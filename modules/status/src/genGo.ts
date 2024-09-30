@@ -3,7 +3,7 @@ import type {IConfigFile} from "./configReader.ts";
 
 export class GenGo extends Gen {
     constructor(config: IConfigFile, dir: string) {
-        const before = `package status\n\ntype ${config.enum} = uint16\n\nconst (\n`
+        const before = `package status\n\ntype ${config.enum} = uint32\n\nconst (\n`
         const after = `)`
         super(config, 'go', before, after, dir);
     }
