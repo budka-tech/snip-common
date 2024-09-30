@@ -6,9 +6,9 @@ tasks:
       - gen
     desc: "Генерация proto кода"
     cmds:
-      - protoc -I modules/contract --go_out=dist/go/contract --go_opt=paths=source_relative --go-grpc_out=dist/go/contract --go-grpc_opt=paths=source_relative modules/contract/*/*.proto
-      - protoc -I modules/contract --dart_out=dist/dart/contract --proto_path=modules/contract modules/contract/*/*.proto
-      - protoc -I modules/contract --plugin=protoc-gen-ts=node_modules/.bin/protoc-gen-ts --ts_out=dist/ts/contract modules/contract/*/*.proto
+      - protoc -I modules/contract --go_out=dist/go/contract --go_opt=paths=source_relative --go-grpc_out=dist/go/contract --go-grpc_opt=paths=source_relative modules/contract/*.proto
+      - protoc -I modules/contract --dart_out=dist/dart/contract --proto_path=modules/contract modules/contract/*.proto
+      - protoc -I modules/contract --plugin=protoc-gen-ts=node_modules/.bin/protoc-gen-ts --ts_out=dist/ts/contract modules/contract/*.proto
   update:
     desc: "Push changes in all submodules and update the main repository"
     cmds:

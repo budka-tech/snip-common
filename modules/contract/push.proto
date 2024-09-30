@@ -1,0 +1,25 @@
+syntax = "proto3";
+package gsm;
+option go_package = "snip.push;pushv1";
+
+import "google/protobuf/timestamp.proto";
+
+service Push {
+  rpc Now(NowRequest) returns(CommonResponse);
+  rpc Schedule(ScheduleRequest) returns(CommonResponse);
+}
+
+message CommonResponse {
+  uint32 status = 1;
+}
+
+message NowRequest {
+  string id = 1;
+  string text = 2;
+}
+
+message ScheduleRequest {
+  string text = 1;
+  google.protobuf.Timestamp date = 2;
+  repeated string id = 3;
+}

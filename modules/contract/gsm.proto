@@ -1,14 +1,13 @@
 syntax = "proto3";
+
+import "common.proto";
+
 package gsm;
 option go_package = "snip.gsm;gsmv1";
 
 service Gsm {
-  rpc SendSms(SendSmsRequest) returns(CommonResponse);
-  rpc FlashCall(FlashCallRequest) returns(CommonResponse);
-}
-
-message CommonResponse {
-  uint32 status = 1;
+  rpc SendSms(SendSmsRequest) returns(common.Response);
+  rpc FlashCall(FlashCallRequest) returns(common.Response);
 }
 
 message SendSmsRequest {

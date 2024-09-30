@@ -1,27 +1,25 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
+import "common.proto";
 
 package users;
 option go_package = "snip.users;usersv1";
 
+
 service Users {
   rpc Identification(IdentificationRequest) returns(IdentificationResponse);
-  rpc CheckCode(CheckCodeRequest) returns(CommonResponse);
+  rpc CheckCode(CheckCodeRequest) returns(common.Response);
   rpc LoginByCode(LoginRequest) returns (LoginResponse);
   rpc Register(RegisterRequest) returns(LoginResponse);
-  rpc HasSession(HasSessionRequest) returns(CommonResponse);
+  rpc HasSession(HasSessionRequest) returns(common.Response);
   rpc GetAccount(CommonRequest) returns(Account);
-  rpc UpdateAccountData(UpdateAccountDataRequest) returns(CommonResponse);
-  rpc UpdatePassword(UpdatePasswordRequest) returns(CommonResponse);
-  rpc UpdatePhoto(UpdatePhotoRequest) returns(CommonResponse);
-  rpc AddPhone(AddPhoneRequest) returns(CommonResponse);
-  rpc UpdatePhone(UpdatePhotoRequest) returns(CommonResponse);
-  rpc RemovePhone(RemovePhoneRequest) returns(CommonResponse);
-}
-
-message CommonResponse {
-  uint32 status = 1;
+  rpc UpdateAccountData(UpdateAccountDataRequest) returns(common.Response);
+  rpc UpdatePassword(UpdatePasswordRequest) returns(common.Response);
+  rpc UpdatePhoto(UpdatePhotoRequest) returns(common.Response);
+  rpc AddPhone(AddPhoneRequest) returns(common.Response);
+  rpc UpdatePhone(UpdatePhotoRequest) returns(common.Response);
+  rpc RemovePhone(RemovePhoneRequest) returns(common.Response);
 }
 
 message CommonRequest {
