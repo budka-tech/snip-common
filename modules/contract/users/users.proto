@@ -26,20 +26,14 @@ message CommonRequest {
   uint32 accountId = 2;
 }
 
-enum IdentificationType {
-  FlashCall = 0;
-  SMS = 1;
-  Push = 2;
-}
-
 message IdentificationRequest {
   string phone = 1;
 }
 
 message IdentificationResponse {
   uint32 status = 1;
-  IdentificationType type = 2;
-  repeated IdentificationType otherMethods = 3;
+  uint32 type = 2;
+  repeated uint32 methods = 3;
   string data = 4;
 }
 
