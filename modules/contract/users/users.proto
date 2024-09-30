@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/timestamp.proto";
-import "common.proto";
+import "common/common.proto";
 
 package users;
 option go_package = "snip.users;usersv1";

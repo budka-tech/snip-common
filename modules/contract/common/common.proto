@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "github.com/budka-tech/snip-common-go/contract/common;commonv1";
+
+message Response {
+  uint32 status = 1;
+}

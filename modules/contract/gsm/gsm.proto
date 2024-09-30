@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "common.proto";
+import "common/common.proto";
 
 package gsm;
 option go_package = "snip.gsm;gsmv1";
