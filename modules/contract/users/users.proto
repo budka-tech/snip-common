@@ -6,8 +6,10 @@ package users;
 option go_package = "snip.users;usersv1";
 
 service Users {
-  rpc Register(RegisterRequest) returns(CommonResponse);
-  rpc Login(LoginRequest) returns (LoginResponse);
+  rpc Identification(IdentificationRequest) returns(IdentificationResponse);
+  rpc CheckCode(CheckCodeRequest) returns(CommonResponse);
+  rpc LoginByCode(LoginRequest) returns (LoginResponse);
+  rpc Register(RegisterRequest) returns(LoginResponse);
   rpc HasSession(HasSessionRequest) returns(CommonResponse);
   rpc GetAccount(CommonRequest) returns(Account);
   rpc UpdateAccountData(UpdateAccountDataRequest) returns(CommonResponse);
@@ -19,12 +21,32 @@ service Users {
 }
 
 message CommonResponse {
-  bool status = 1;
-  uint32 code = 2;
+  uint32 status = 1;
 }
 
 message CommonRequest {
   uint32 accountId = 2;
+}
+
+enum IdentificationType {
+  FlashCall = 0;
+  SMS = 1;
+  Push = 2;
+}
+
+message IdentificationRequest {
+  string phone = 1;
+}
+
+message IdentificationResponse {
+  uint32 status = 1;
+  optional IdentificationType type = 2;
+  repeated IdentificationType otherMethods = 3;
+  optional string data = 4;
+}
+
+message CheckCodeRequest {
+  string code = 1;
 }
 
 message HasSessionRequest {
@@ -34,6 +56,12 @@ message HasSessionRequest {
 
 message RegisterRequest {
   string phone = 1;
+  string name = 2;
+  string surname = 3;
+  int32 country = 10;
+  int32 district = 11;
+  int32 locale = 12;
+  int32 timezone = 13;
 }
 
 message LoginRequest {
@@ -41,8 +69,9 @@ message LoginRequest {
 }
 
 message LoginResponse {
-  int64 sessionId = 1;
-  Account account = 2;
+  uint32 status = 1;
+  optional int64 sessionId = 2;
+  optional Account account = 3;
 }
 
 message Account {
@@ -95,8 +124,9 @@ message UpdateAccountDataRequest {
   string patronymic = 3;
   string birthdate = 4;
   int32 country = 5;
-  int32 locale = 6;
-  int32 timezone = 7;
+  int32 district = 6;
+  int32 locale = 7;
+  int32 timezone = 8;
 }
 
 message UpdatePasswordRequest {

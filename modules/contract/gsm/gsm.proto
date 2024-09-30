@@ -8,8 +8,7 @@ service Gsm {
 }
 
 message CommonResponse {
-  bool status = 1;
-  uint32 code = 2;
+  uint32 status = 1;
 }
 
 message SendSmsRequest {
