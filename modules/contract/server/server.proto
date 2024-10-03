@@ -16,9 +16,10 @@ enum MessageType {
 }
 
 enum Domain {
-  Auth = 0;
-  Users = 1;
-  Assist = 2;
+  Socket = 0;
+  Auth = 1;
+  Users = 2;
+  Assist = 3;
 }
 
 message Meta {
