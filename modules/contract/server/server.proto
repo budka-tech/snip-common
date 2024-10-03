@@ -5,19 +5,14 @@ package server;
 option go_package = "snip.server;serverv1";
 
 service Server {
-  rpc Call(Request) returns (google.protobuf.Empty);
-  rpc Subscribe(Request) returns (google.protobuf.Empty);
-  rpc UnSubscribe(UnsubscribeRequest) returns (google.protobuf.Empty);
+  rpc Request(ParamsRequest) returns (google.protobuf.Empty);
 }
 
 enum MessageType {
   Call = 0;
-  CallSuccess = 1;
-  CallError = 2;
-  Subscribe = 3;
-  SubscribeError = 4;
-  Unsubscribe = 5;
-  Event = 6;
+  Subscribe = 1;
+  Unsubscribe = 2;
+  Event = 3;
 }
 
 enum Domain {
@@ -29,36 +24,18 @@ enum Domain {
 message Meta {
   MessageType type = 1;
   Domain domain = 2;
-  string name = 3;
-  string id = 4;
+  uint32 id = 3;
 }
 
-message Request {
+message ParamsRequest {
   Meta meta = 1;
   google.protobuf.Any data = 2;
 }
 
-message CallResponse {
+message Response {
   Meta meta = 1;
-  google.protobuf.Any data = 2;
-}
-
-message CallSuccessResponse {
-  Meta meta = 1;
-  google.protobuf.Any data = 2;
-}
-
-message CallErrorResponse {
-  Meta meta = 1;
-  uint32 code = 2;
-}
-
-message SubscribeRequest {
-  Meta meta = 1;
-}
-
-message UnsubscribeRequest {
-  Meta meta = 1;
+  uint32 status = 2;
+  google.protobuf.Any data = 3;
 }
 
 enum SubscribeAction {
@@ -71,19 +48,4 @@ enum SubscribeAction {
 message SubscribeData {
   SubscribeAction action = 1;
   google.protobuf.Any data = 2;
-}
-
-message SubscribeResponse {
-  Meta meta = 1;
-  SubscribeData data = 2;
-}
-
-message SubscribeErrorResponse {
-  Meta meta = 1;
-  uint32 code = 2;
-}
-
-message EventMessage {
-  Meta meta = 1;
-  uint32 code = 2;
 }
