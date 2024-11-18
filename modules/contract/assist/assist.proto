@@ -1,0 +1,181 @@
+syntax = "proto3";
+
+package assist;
+
+option go_package = "snip.assist;assistv1";
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
+service Assist {
+  rpc CreateChat(CreateChatRequest) returns (CreateChatResponse);
+  rpc ChangeChatFolder(ChangeChatFolderRequest) returns (ChangeChatFolderResponse);
+  rpc ChangeChatTitle(ChangeChatTitleRequest) returns (ChangeChatTitleResponse);
+  rpc DeleteChat(DeleteChatRequest) returns (common.Response);
+  rpc GetChatByID(GetChatByIDRequest) returns (GetChatByIDResponse);
+  rpc GetChatsInFolder(GetChatsInFolderRequest) returns (GetChatsInFolderResponse);
+  rpc GetUserChats(GetUserChatsRequest) returns (GetUserChatsResponse);
+
+  rpc CreateFolder(CreateFolderRequest) returns (CreateFolderResponse);
+  rpc DeleteFolder(DeleteFolderRequest) returns (common.Response);
+  rpc GetFolderByID(GetFolderByIDRequest) returns (GetFolderByIDResponse);
+  rpc GetUserFolders(GetUserFoldersRequest) returns (GetUserFoldersResponse);
+
+  rpc CreateMessage(CreateMessageRequest) returns (CreateMessageResponse);
+  rpc GetMessageByID(GetMessageByIDRequest) returns (GetMessageByIDResponse);
+  rpc GetMessagesInChat(GetMessagesInChatRequest) returns (GetMessagesInChatResponse);
+}
+
+message UUID {
+  bytes value = 1;
+}
+
+// Folder Messages
+message Folder {
+  bytes id = 1;
+  int32 user_id = 2;
+  string name = 3;
+}
+
+message CreateFolderRequest {
+  int32 user_id = 1;
+  string name = 2;
+}
+
+message CreateFolderResponse {
+  Folder folder = 1;
+  uint32 status = 2;
+}
+
+message DeleteFolderRequest {
+  bytes id = 1;
+}
+
+message GetFolderByIDRequest {
+  bytes id = 1;
+}
+
+message GetFolderByIDResponse {
+  Folder folder = 1;
+  uint32 status = 2;
+}
+
+message GetUserFoldersRequest {
+  int32 user_id = 1;
+  int32 limit = 2;
+}
+
+message GetUserFoldersResponse {
+  repeated Folder folders = 1;
+  uint32 status = 2;
+}
+
+// Chat Messages
+message Chat {
+  bytes id = 1;
+  int32 user_id = 2;
+  optional bytes folder_id = 3;
+  optional string title = 4;
+}
+
+message CreateChatRequest {
+  int32 user_id = 1;
+  optional bytes folder_id = 3;
+  optional string title = 4;
+}
+
+message CreateChatResponse {
+  Chat chat = 1;
+  uint32 status = 2;
+}
+
+message ChangeChatFolderRequest {
+  bytes id = 1;
+  optional bytes folder_id = 2;
+}
+
+message ChangeChatFolderResponse {
+  Chat chat = 1;
+  uint32 status = 2;
+}
+
+message ChangeChatTitleRequest {
+  bytes id = 1;
+  optional string title = 2;
+}
+
+message ChangeChatTitleResponse {
+  Chat chat = 1;
+  uint32 status = 2;
+}
+
+message DeleteChatRequest {
+  bytes id = 1;
+}
+
+message GetChatByIDRequest {
+  bytes id = 1;
+}
+
+message GetChatByIDResponse {
+  Chat chat = 1;
+  uint32 status = 2;
+}
+
+message GetChatsInFolderRequest {
+  bytes folder_id = 1;
+  int32 limit = 2;
+}
+
+message GetChatsInFolderResponse {
+  repeated Chat chats = 1;
+  uint32 status = 2;
+}
+
+message GetUserChatsRequest {
+  int32 user_id = 1;
+  int32 limit = 2;
+}
+
+message GetUserChatsResponse {
+  repeated Chat chats = 1;
+  uint32 status = 2;
+}
+
+// Message Messages
+message Message {
+  bytes id = 1;
+  bytes chat_id = 2;
+  bool is_bot = 3;
+  string content = 4;
+  google.protobuf.Timestamp timestamp = 5;
+}
+
+message CreateMessageRequest {
+  bytes chat_id = 1;
+  string content = 2;
+}
+
+message CreateMessageResponse {
+  Message message = 1;
+  uint32 status = 2;
+}
+
+message GetMessageByIDRequest {
+  bytes id = 1;
+}
+
+message GetMessageByIDResponse {
+  Message message = 1;
+  uint32 status = 2;
+}
+
+message GetMessagesInChatRequest {
+  bytes chat_id = 1;
+  int32 limit = 2;
+  optional google.protobuf.Timestamp from_message_date = 3;
+}
+
+message GetMessagesInChatResponse {
+  repeated Message messages = 1;
+  uint32 status = 2;
+}
