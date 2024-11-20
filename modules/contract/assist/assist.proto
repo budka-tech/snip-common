@@ -20,7 +20,7 @@ service Assist {
   rpc GetFolderByID(GetFolderByIDRequest) returns (GetFolderByIDResponse);
   rpc GetUserFolders(GetUserFoldersRequest) returns (GetUserFoldersResponse);
 
-  rpc CreateMessage(CreateMessageRequest) returns (CreateMessageResponse);
+  rpc SendMessage(SendMessageRequest) returns (SendMessageResponse);
   rpc GetMessageByID(GetMessageByIDRequest) returns (GetMessageByIDResponse);
   rpc GetMessagesInChat(GetMessagesInChatRequest) returns (GetMessagesInChatResponse);
 }
@@ -75,6 +75,7 @@ message Chat {
   int32 user_id = 2;
   optional bytes folder_id = 3;
   optional string title = 4;
+  google.protobuf.Timestamp timestamp = 5;
 }
 
 message CreateChatRequest {
@@ -150,13 +151,14 @@ message Message {
   google.protobuf.Timestamp timestamp = 5;
 }
 
-message CreateMessageRequest {
+message SendMessageRequest {
   bytes chat_id = 1;
   string content = 2;
 }
 
-message CreateMessageResponse {
-  Message message = 1;
+message SendMessageResponse {
+  Message request_message = 1;
+  Message response_message = 3;
   uint32 status = 2;
 }
 
