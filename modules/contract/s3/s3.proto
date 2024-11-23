@@ -1,0 +1,122 @@
+syntax = "proto3";
+
+package s3;
+
+option go_package = "snip.s3;s3v1";
+
+import "google/protobuf/timestamp.proto";
+import "common/common.proto";
+
+// Endpoint service definition
+service Endpoint {
+  rpc RegisterBucket(RegisterBucketRequest) returns (RegisterBucketResponse);
+  rpc HasBucket(HasBucketRequest) returns (HasBucketResponse);
+  rpc UnregisterBucket(UnregisterBucketRequest) returns (common.Response);
+  rpc GetAllBuckets(GetAllBucketsRequest) returns (GetAllBucketsResponse);
+  rpc CreateImage(CreateImageRequest) returns (CreateImageResponse);
+  rpc GetImage(GetImageRequest) returns (GetImageResponse);
+  rpc GetImageWithBucket(GetImageWithBucketRequest) returns (GetImageWithBucketResponse);
+  rpc DeleteImage(DeleteImageRequest) returns (common.Response);
+  rpc GetAllImages(GetAllImagesRequest) returns (GetAllImagesResponse);
+  rpc GetImagesInBucket(GetImagesInBucketRequest) returns (GetImagesInBucketResponse);
+}
+
+// Bucket message
+message Bucket {
+  string bucket_name = 1; // Название бакета
+}
+
+// Image message
+message Image {
+  string id = 1;             // Уникальный идентификатор изображения
+  string file_extension = 2; // Расширение файла изображения
+}
+
+// ImageWithBucket message
+message ImageWithBucket {
+  string id = 1;             // Уникальный идентификатор изображения
+  string bucket_name = 2;    // Название бакета
+  string file_extension = 3; // Расширение файла изображения
+}
+
+// Request and response messages for each function
+message RegisterBucketRequest {
+  string bucket_name = 1;
+}
+
+message RegisterBucketResponse {
+  Bucket bucket = 1;
+  uint32 status = 2;
+}
+
+message HasBucketRequest {
+  string bucket_name = 1;
+}
+
+message HasBucketResponse {
+  bool exists = 1;
+  uint32 status = 2;
+}
+
+message UnregisterBucketRequest {
+  string bucket_name = 1;
+}
+
+message GetAllBucketsRequest {}
+
+message GetAllBucketsResponse {
+  repeated Bucket buckets = 1;
+  uint32 status = 2;
+}
+
+message CreateImageRequest {
+  string bucket_name = 1;
+  bytes file = 2;
+  string file_extension = 3;
+}
+
+message CreateImageResponse {
+  Image image = 1;
+  uint32 status = 2;
+}
+
+message GetImageRequest {
+  string id = 1;
+}
+
+message GetImageResponse {
+  Image image = 1;
+  uint32 status = 2;
+}
+
+message GetImageWithBucketRequest {
+  string id = 1;
+}
+
+message GetImageWithBucketResponse {
+  ImageWithBucket image_with_bucket = 1;
+  uint32 status = 2;
+}
+
+message DeleteImageRequest {
+  string id = 1;
+}
+
+message GetAllImagesRequest {
+  int32 limit = 1;
+}
+
+message GetAllImagesResponse {
+  repeated Image images = 1;
+  uint32 status = 2;
+}
+
+message GetImagesInBucketRequest {
+  string bucket_name = 1;
+  int32 limit = 2;
+}
+
+message GetImagesInBucketResponse {
+  repeated Image images = 1;
+  uint32 status = 2;
+}
