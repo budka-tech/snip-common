@@ -27,12 +27,12 @@ message Bucket {
 
 // Image message
 message Image {
-  string id = 1;             // Уникальный идентификатор изображения
+  bytes id = 1;             // Уникальный идентификатор изображения
 }
 
 // ImageWithBucket message
 message ImageWithBucket {
-  string id = 1;             // Уникальный идентификатор изображения
+  bytes id = 1;             // Уникальный идентификатор изображения
   string bucket_name = 2;    // Название бакета
 }
 
@@ -80,7 +80,7 @@ message CreateImageResponse {
 }
 
 message GetImageRequest {
-  string id = 1;
+  bytes id = 1;
 }
 
 message GetImageResponse {
@@ -89,7 +89,7 @@ message GetImageResponse {
 }
 
 message GetImageWithBucketRequest {
-  string id = 1;
+  bytes id = 1;
 }
 
 message GetImageWithBucketResponse {
@@ -98,7 +98,7 @@ message GetImageWithBucketResponse {
 }
 
 message DeleteImageRequest {
-  string id = 1;
+  bytes id = 1;
 }
 
 message GetAllImagesRequest {
