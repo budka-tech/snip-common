@@ -28,14 +28,12 @@ message Bucket {
 // Image message
 message Image {
   string id = 1;             // Уникальный идентификатор изображения
-  string file_extension = 2; // Расширение файла изображения
 }
 
 // ImageWithBucket message
 message ImageWithBucket {
   string id = 1;             // Уникальный идентификатор изображения
   string bucket_name = 2;    // Название бакета
-  string file_extension = 3; // Расширение файла изображения
 }
 
 // Request and response messages for each function
@@ -72,6 +70,8 @@ message CreateImageRequest {
   string bucket_name = 1;
   bytes file = 2;
   string file_extension = 3;
+  optional float quality = 4;
+  optional int32 max_size = 5;
 }
 
 message CreateImageResponse {
