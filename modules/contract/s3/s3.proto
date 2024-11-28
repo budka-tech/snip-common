@@ -72,6 +72,7 @@ message CreateImageRequest {
   string file_extension = 3;
   optional float quality = 4;
   optional int32 max_size = 5;
+  optional bytes id = 6;
 }
 
 message CreateImageResponse {
