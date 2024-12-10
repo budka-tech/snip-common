@@ -38,6 +38,7 @@ message IdentifyRequest {
 message IdentifyResponse {
   uint32 status = 1;
   optional AccountFull account = 2;
+  repeated string errors = 3;
 }
 
 message LoginRequest {
