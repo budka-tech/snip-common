@@ -89,7 +89,7 @@ message Account {
   int32 district = 7;
   int32 locale = 8;
   int32 timezone = 9;
-  int32 photo = 10;
+  bytes photo = 10;
   google.protobuf.Timestamp created_at = 14;
   google.protobuf.Timestamp updated_at = 15;
 }
