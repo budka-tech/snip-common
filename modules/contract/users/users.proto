@@ -46,7 +46,7 @@ message IdentifyResponse {
   uint32 status = 1;
   map<string, string> errors = 2;
   optional Account account = 3;
-  optional Registration Registration = 4;
+  optional Registration registration = 4;
 }
 
 message LoginRequest {
@@ -95,7 +95,7 @@ message Account {
 }
 
 message Registration {
-  int32 id = 1;
+  string id = 1;
   string phone = 2;
   int32 type = 3;
   int32 code = 4;
