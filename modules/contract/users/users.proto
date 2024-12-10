@@ -8,7 +8,8 @@ option go_package = "snip.users;usersv1";
 
 
 service Users {
-  rpc Identification(IdentificationRequest) returns(IdentificationResponse);
+  rpc Identify(IdentifyRequest) returns(IdentifyResponse);
+  rpc Login(LoginRequest) returns(LoginResponse);
   rpc CheckCode(CheckCodeRequest) returns(common.Response);
   rpc LoginByCode(LoginRequest) returns (LoginResponse);
   rpc Register(RegisterRequest) returns(LoginResponse);
@@ -26,16 +27,47 @@ message CommonRequest {
   uint32 accountId = 2;
 }
 
-message IdentificationRequest {
+message IdentifyRequest {
+  string token = 1;
+  string userAgent = 2;
+  int32 device = 3;
+  bytes ip = 4;
+  string fcm = 5;
+}
+
+message IdentifyResponse {
+  uint32 status = 1;
+  optional AccountFull account = 2;
+}
+
+message LoginRequest {
   string phone = 1;
 }
 
-message IdentificationResponse {
+message LoginResponse {
   uint32 status = 1;
   uint32 type = 2;
   repeated uint32 methods = 3;
   string data = 4;
   google.protobuf.Timestamp endedAt = 5;
+}
+
+message AccountFull {
+  int32 id = 1;
+  string name = 2;
+  string surname = 3;
+  string patronymic = 4;
+  google.protobuf.Timestamp birthdate = 5;
+  int32 country = 6;
+  int32 district = 7;
+  int32 locale = 8;
+  int32 timezone = 9;
+  int32 photo = 10;
+  repeated AccountEmail emails = 11;
+  repeated AccountPhone phones = 12;
+  repeated AccountRole roles = 13;
+  google.protobuf.Timestamp createdAt = 14;
+  google.protobuf.Timestamp updatedAt = 15;
 }
 
 message CheckCodeRequest {
@@ -57,15 +89,15 @@ message RegisterRequest {
   int32 timezone = 13;
 }
 
-message LoginRequest {
-  string phone = 1;
-}
-
-message LoginResponse {
-  uint32 status = 1;
-  optional int64 sessionId = 2;
-  optional Account account = 3;
-}
+//message LoginRequest {
+//  string phone = 1;
+//}
+//
+//message LoginResponse {
+//  uint32 status = 1;
+//  optional int64 sessionId = 2;
+//  optional Account account = 3;
+//}
 
 message Account {
   int32 id = 1;
