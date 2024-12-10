@@ -6,4 +6,5 @@ option go_package = "github.com/budka-tech/snip-common-go/contract/common;common
 
 message Response {
   uint32 status = 1;
+  map<string, string> errors = 2;
 }

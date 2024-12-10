@@ -10,17 +10,25 @@ option go_package = "snip.users;usersv1";
 service Users {
   rpc Identify(IdentifyRequest) returns(IdentifyResponse);
   rpc Login(LoginRequest) returns(LoginResponse);
+  rpc Logout(LogoutRequest) returns(common.Response);
   rpc CheckCode(CheckCodeRequest) returns(common.Response);
-  rpc LoginByCode(LoginRequest) returns (LoginResponse);
-  rpc Register(RegisterRequest) returns(LoginResponse);
-  rpc HasSession(HasSessionRequest) returns(common.Response);
+
   rpc GetAccount(CommonRequest) returns(Account);
+  rpc GetAccountShort(CommonRequest) returns(Account);
+
+  rpc GetSessions(CommonRequest) returns(GetSessionsResponse);
+
   rpc UpdateAccountData(UpdateAccountDataRequest) returns(common.Response);
-  rpc UpdatePassword(UpdatePasswordRequest) returns(common.Response);
-  rpc UpdatePhoto(UpdatePhotoRequest) returns(common.Response);
-  rpc AddPhone(AddPhoneRequest) returns(common.Response);
-  rpc UpdatePhone(UpdatePhotoRequest) returns(common.Response);
-  rpc RemovePhone(RemovePhoneRequest) returns(common.Response);
+
+  rpc GetPhones(CommonRequest) returns(GetPhonesResponse);
+  rpc AttachPhone(PhoneManipulationRequest) returns(ConfirmResponse);
+  rpc DetachPhone(PhoneManipulationRequest) returns(ConfirmResponse);
+  rpc SetPrimaryPhone(PhoneManipulationRequest) returns(ConfirmResponse);
+
+  rpc GetEmails(CommonRequest) returns(GetEmailsResponse);
+  rpc AttachEmail(EmailManipulationRequest) returns(ConfirmResponse);
+  rpc DetachEmail(EmailManipulationRequest) returns(ConfirmResponse);
+  rpc SetPrimaryEmail(EmailManipulationRequest) returns(ConfirmResponse);
 }
 
 message CommonRequest {
@@ -31,14 +39,14 @@ message IdentifyRequest {
   string token = 1;
   string userAgent = 2;
   int32 device = 3;
-  bytes ip = 4;
   string fcm = 5;
 }
 
 message IdentifyResponse {
   uint32 status = 1;
-  optional AccountFull account = 2;
-  repeated string errors = 3;
+  map<string, string> errors = 2;
+  optional Account account = 3;
+  optional Registration Registration = 4;
 }
 
 message LoginRequest {
@@ -47,13 +55,31 @@ message LoginRequest {
 
 message LoginResponse {
   uint32 status = 1;
-  uint32 type = 2;
-  repeated uint32 methods = 3;
-  string data = 4;
-  google.protobuf.Timestamp endedAt = 5;
+  map<string, string> errors = 2;
+  optional LoginData data = 3;
 }
 
-message AccountFull {
+message LoginData {
+  bool is_new = 1;
+  uint32 type = 2;
+  string data = 3;
+  google.protobuf.Timestamp expiredAt = 4;
+  repeated uint32 methods = 5;
+}
+
+message ConfirmResponse {
+  uint32 type = 1;
+  map<string, string> errors = 2;
+  string data = 3;
+  google.protobuf.Timestamp expiredAt = 4;
+  repeated uint32 methods = 5;
+}
+
+message LogoutRequest {
+  string token = 1;
+}
+
+message Account {
   int32 id = 1;
   string name = 2;
   string surname = 3;
@@ -64,15 +90,29 @@ message AccountFull {
   int32 locale = 8;
   int32 timezone = 9;
   int32 photo = 10;
-  repeated AccountEmail emails = 11;
-  repeated AccountPhone phones = 12;
-  repeated AccountRole roles = 13;
-  google.protobuf.Timestamp createdAt = 14;
-  google.protobuf.Timestamp updatedAt = 15;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp updated_at = 15;
+}
+
+message Registration {
+  int32 id = 1;
+  string phone = 2;
+  int32 type = 3;
+  int32 code = 4;
+  int32 timezone = 5;
+  int32 country = 6;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp expired_at = 15;
+}
+
+message AccountShort {
+  string name = 2;
+  string surname = 3;
+  string patronymic = 4;
 }
 
 message CheckCodeRequest {
-  string code = 1;
+  int32 code = 1;
 }
 
 message HasSessionRequest {
@@ -100,40 +140,18 @@ message RegisterRequest {
 //  optional Account account = 3;
 //}
 
-message Account {
-  int32 id = 1;
-  repeated AccountPhone phones = 2;
-  repeated AccountEmail emails = 3;
-  repeated AccountRole roles = 4;
-  string photo = 5;
-  string name = 6;
-  string surname = 7;
-  string patronymic = 8;
-  google.protobuf.Timestamp birthdate = 9;
-  int32 country = 10;
-  int32 district = 11;
-  int32 locale = 12;
-  int32 timezone = 13;
-  google.protobuf.Timestamp created_at = 14;
-  google.protobuf.Timestamp updated_at = 15;
-}
-
 message AccountEmail {
   uint64 id = 1;
-  uint32 account_id = 2;
-  string email = 3;
-  int32 order = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp updated_at = 6;
+  string email = 2;
+  bool is_primary = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
 }
 
 message AccountPhone {
   uint64 id = 1;
-  uint32 account_id = 2;
-  string phone = 3;
-  int32 order = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp updated_at = 6;
+  string phone = 2;
+  bool is_primary = 3;
 }
 
 message AccountRole {
@@ -155,27 +173,43 @@ message UpdateAccountDataRequest {
   int32 timezone = 8;
 }
 
-message UpdatePasswordRequest {
-  int32 accountId = 1;
-  string password = 2;
-}
-
-message UpdatePhotoRequest {
-  int32 accountId = 1;
-  bytes photo = 2;
-}
-
-message AddPhoneRequest {
+message PhoneManipulationRequest {
   int32 accountId = 1;
   string phone = 2;
 }
 
-message UpdatePhoneRequest {
+message EmailManipulationRequest {
   int32 accountId = 1;
-  string phone = 2;
+  string email = 2;
 }
 
-message RemovePhoneRequest {
+message GetSessionsRequest {
   int32 accountId = 1;
-  string phone = 2;
+}
+
+message GetSessionsResponse {
+  uint32 status = 1;
+  repeated Session sessions = 2;
+}
+
+message Session {
+  string  id = 1;
+  int32 account_id = 2;
+  string  ip = 3;
+  string UserAgent = 4;
+  int32 Device = 5;
+  string Fcm = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.Timestamp used_at = 8;
+}
+
+
+message GetEmailsResponse {
+  uint32 status = 1;
+  repeated AccountEmail emails = 2;
+}
+
+message GetPhonesResponse {
+  uint32 status = 1;
+  repeated AccountPhone phones = 2;
 }
