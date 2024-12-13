@@ -9,17 +9,19 @@ service Server {
 }
 
 enum MessageType {
-  Call = 0;
-  Subscribe = 1;
-  Unsubscribe = 2;
-  Event = 3;
+  Null0 = 0;
+  Call = 1;
+  Subscribe = 2;
+  Unsubscribe = 3;
+  Event = 4;
 }
 
 enum Domain {
-  Socket = 0;
-  Auth = 1;
-  Users = 2;
-  Assist = 3;
+  Null1 = 0;
+  Socket = 1;
+  Auth = 2;
+  Users = 3;
+  Assist = 4;
 }
 
 message Meta {
@@ -41,10 +43,11 @@ message Response {
 }
 
 enum SubscribeAction {
-  Init = 0;
-  Create = 1;
-  Update = 2;
-  Delete = 3;
+  Null2 = 0;
+  Init = 1;
+  Create = 2;
+  Update = 3;
+  Delete = 4;
 }
 
 message SubscribeData {

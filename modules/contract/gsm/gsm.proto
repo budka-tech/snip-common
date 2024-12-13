@@ -12,8 +12,9 @@ service Gsm {
 }
 
 enum Method {
-  FlASH_CALL = 0;
-  FlASH_CALL_BACK = 1;
+  NULL = 0;
+  FlASH_CALL = 1;
+  FlASH_CALL_BACK = 2;
 }
 
 message FlashCallRequest {
