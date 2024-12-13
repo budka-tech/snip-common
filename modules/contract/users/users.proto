@@ -31,6 +31,29 @@ service Users {
   rpc SetPrimaryEmail(EmailManipulationRequest) returns(ConfirmResponse);
 }
 
+enum Method {
+  IDENTIFY = 0;
+  LOGIN = 1;
+  LOGOUT = 2;
+  CHECK_CODE = 3;
+
+  GET_ACCOUNT = 4;
+  GET_ACCOUNT_SHORT = 5;
+
+  GET_SESSIONS = 6;
+
+  UPDATE_ACCOUNT_DATA = 7;
+  GET_PHONES = 8;
+  ATTACH_PHONE = 9;
+  DETACH_PHONE = 10;
+  SET_PRIMARY_PHONE = 11;
+
+  GET_EMAILS = 12;
+  ATTACH_EMAIL = 13;
+  DETACH_EMAIL = 14;
+  SET_PRIMARY_EMAIL = 15;
+}
+
 message CommonRequest {
   uint32 accountId = 2;
 }

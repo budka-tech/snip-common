@@ -6,15 +6,15 @@ package gsm;
 option go_package = "snip.gsm;gsmv1";
 
 service Gsm {
-//  rpc SendSms(SendSmsRequest) returns(common.Response);
+  //  rpc SendSms(SendSmsRequest) returns(common.Response);
   rpc FlashCall(FlashCallRequest) returns(common.Response);
   rpc FlashCallBack(FlashCallBackRequest) returns(common.Response);
 }
 
-//message SendSmsRequest {
-//  string message = 1;
-//  string phone = 2;
-//}
+enum Method {
+  FlASH_CALL = 0;
+  FlASH_CALL_BACK = 1;
+}
 
 message FlashCallRequest {
   string phone = 1;

@@ -25,7 +25,8 @@ enum Domain {
 message Meta {
   MessageType type = 1;
   Domain domain = 2;
-  uint32 id = 3;
+  uint32 method = 3;
+  uint32 id = 4;
 }
 
 message ParamsRequest {
