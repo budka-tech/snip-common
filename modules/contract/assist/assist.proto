@@ -25,6 +25,25 @@ service Assist {
   rpc GetMessagesInChat(GetMessagesInChatRequest) returns (GetMessagesInChatResponse);
 }
 
+
+enum Method {
+  NULL = 0;
+  CREATE_CHAT = 1;
+  CHANGE_CHAT_FOLDER = 2;
+  CHANGE_CHAT_TITLE = 3;
+  DELETE_CHAT = 4;
+  GET_CHAT_BY_ID = 5;
+  GET_CHATS_IN_FOLDER = 6;
+  GET_USER_CHATS = 7;
+  CREATE_FOLDER = 8;
+  DELETE_FOLDER = 9;
+  GET_FOLDER_BY_ID = 10;
+  GET_USER_FOLDERS = 11;
+  SEND_MESSAGE = 12;
+  GET_MESSAGE_BY_ID = 13;
+  GET_MESSAGES_IN_CHAT = 14;
+}
+
 message UUID {
   bytes value = 1;
 }
