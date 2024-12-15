@@ -176,8 +176,7 @@ message SendMessageRequest {
 }
 
 message SendMessageResponse {
-  Message request_message = 1;
-  Message response_message = 3;
+  Message message = 1;
   uint32 status = 2;
 }
 
