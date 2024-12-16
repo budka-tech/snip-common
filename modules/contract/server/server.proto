@@ -22,6 +22,7 @@ enum Domain {
   Auth = 2;
   Users = 3;
   Assist = 4;
+  Gsm = 5;
 }
 
 message Meta {
