@@ -1,6 +1,10 @@
 version: '3'
 
 tasks:
+  status:
+    desc: "Генерация статусов"
+    cmds:
+      - npm run build:status
   generate:
     aliases:
       - gen

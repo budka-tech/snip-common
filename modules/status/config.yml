@@ -1,7 +1,7 @@
 enum: Status
 output:
   go: ./go/status/status.go
-  ts: ./ts/status/status.ts
+  ts: ./ts/src/status/status.ts
   dart: ./dart/status/status.dart
 
 list:

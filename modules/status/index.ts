@@ -1,6 +1,6 @@
 import {ConfigReader} from "./src/configReader.ts";
 import {GenGo} from "./src/genGo.ts";
-import {GenTs} from "./src/genTs.ts.ts";
+import {GenTs} from "./src/genTs.ts";
 import {GenDart} from "./src/genDart.ts";
 import * as path from "node:path";
 
