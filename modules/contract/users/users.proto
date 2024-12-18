@@ -136,7 +136,7 @@ message AccountShort {
 }
 
 message CheckCodeRequest {
-  int32 code = 1;
+  string code = 1;
   string phone = 2;
 }
 
