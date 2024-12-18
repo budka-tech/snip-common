@@ -142,7 +142,7 @@ message CheckCodeRequest {
 
 message CheckCodeResponse {
   uint32 status = 1;
-  optional Session session = 2;
+  optional string token = 2;
 }
 
 message HasSessionRequest {
