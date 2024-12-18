@@ -140,6 +140,11 @@ message CheckCodeRequest {
   string phone = 2;
 }
 
+message CheckCodeResponse {
+  uint32 status = 1;
+  optional Session session = 2;
+}
+
 message HasSessionRequest {
   int64 sessionId = 1;
   uint32 accountId = 2;
