@@ -142,7 +142,8 @@ message CheckCodeRequest {
 
 message CheckCodeResponse {
   uint32 status = 1;
-  optional string token = 2;
+  optional bytes token = 2;
+  optional Account account = 3;
 }
 
 message HasSessionRequest {
